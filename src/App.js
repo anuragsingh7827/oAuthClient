@@ -11,7 +11,7 @@ function App() {
     // const response = await axios.get("https://oauthserver.onrender.com/auth/google/callback", {
     //   withCredentials: true,
     // });
-    console.log(response);
+    // console.log(response);
     const token = Cookies.get("x-auth-cookie");
     if (token) {
       Cookies.remove("x-auth-cookie");
