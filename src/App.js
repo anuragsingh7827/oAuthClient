@@ -8,9 +8,11 @@ function App() {
 
   const fetchUser = () => {
     const token = Cookies.get("x-auth-cookie");
+    console.log(token);
     if (token) {
-      Cookies.remove("x-auth-cookie");
+      // Cookies.remove("x-auth-cookie");
       const decodedToken = jwt_decode(token);
+      console.log(decodedToken);
       setUser(decodedToken);
     }
   };
