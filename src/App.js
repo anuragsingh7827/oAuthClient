@@ -1,24 +1,24 @@
 import { useEffect, useState } from "react";
 import { GOOGLE_AUTH_LINK, LOGOUT_LINK } from "./constants";
-import axios from "axios";
-// import Cookies from "js-cookie";
-// import jwt_decode from "jwt-decode";
+// import axios from "axios";
+import Cookies from "js-cookie";
+import jwt_decode from "jwt-decode";
 
 function App() {
   const [user, setUser] = useState(null);
 
   const fetchUser = async() => {
-    const response = await axios.get("https://oauthserver.onrender.com/auth/google/callback", {
-      withCredentials: true,
-    });
+    // const response = await axios.get("https://oauthserver.onrender.com/auth/google/callback", {
+    //   withCredentials: true,
+    // });
     console.log(response);
-    // const token = Cookies.get("x-auth-cookie");
-    // if (token) {
-    //   Cookies.remove("x-auth-cookie");
-    //   const decodedToken = jwt_decode(token);
-    //   console.log(decodedToken);
-    //   setUser(decodedToken);
-    // }
+    const token = Cookies.get("x-auth-cookie");
+    if (token) {
+      Cookies.remove("x-auth-cookie");
+      const decodedToken = jwt_decode(token);
+      console.log(decodedToken);
+      setUser(decodedToken);
+    }
   };
 
   const handleLogout = (e) => {
