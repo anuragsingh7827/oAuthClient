@@ -6,15 +6,17 @@ import jwt_decode from "jwt-decode";
 function App() {
   const [user, setUser] = useState(null);
 
-  const fetchUser = () => {
-    const token = Cookies.get("x-auth-cookie");
-    console.log(token);
-    if (token) {
-      // Cookies.remove("x-auth-cookie");
-      const decodedToken = jwt_decode(token);
-      console.log(decodedToken);
-      setUser(decodedToken);
-    }
+  const fetchUser = async() => {
+    const response = await fetch("https://oauthserver.onrender.com/auth/google/callback");
+    const data = await response.json();
+    setUser(data.user);
+    // const token = Cookies.get("x-auth-cookie");
+    // if (token) {
+    //   Cookies.remove("x-auth-cookie");
+    //   const decodedToken = jwt_decode(token);
+    //   console.log(decodedToken);
+    //   setUser(decodedToken);
+    // }
   };
 
   const handleLogout = (e) => {
