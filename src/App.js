@@ -9,11 +9,11 @@ function App() {
   const fetchUser = async() => {
     const response = await fetch("https://oauthserver.onrender.com/auth/google/callback", {
       credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      }
+      "Content-Type": "text/html",
     });
+    console.log(response);
     const data = await response.json();
+    console.log(data);
     setUser(data.user);
     // const token = Cookies.get("x-auth-cookie");
     // if (token) {
