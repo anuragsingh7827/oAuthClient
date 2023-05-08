@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
 import { GOOGLE_AUTH_LINK, LOGOUT_LINK } from "./constants";
-import Cookies from "js-cookie";
-import jwt_decode from "jwt-decode";
+// import Cookies from "js-cookie";
+// import jwt_decode from "jwt-decode";
 
 function App() {
   const [user, setUser] = useState(null);
 
   const fetchUser = async() => {
-    const response = await fetch("https://oauthserver.onrender.com/auth/google/callback");
+    const response = await fetch("https://oauthserver.onrender.com/auth/google/callback", {
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    });
     const data = await response.json();
     setUser(data.user);
     // const token = Cookies.get("x-auth-cookie");
