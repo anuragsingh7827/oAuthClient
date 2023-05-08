@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { GOOGLE_AUTH_LINK, LOGOUT_LINK } from "./constants";
+import axios from "axios";
 // import Cookies from "js-cookie";
 // import jwt_decode from "jwt-decode";
 
@@ -7,14 +8,10 @@ function App() {
   const [user, setUser] = useState(null);
 
   const fetchUser = async() => {
-    const response = await fetch("https://oauthserver.onrender.com/auth/google/callback", {
-      credentials: "include",
-      "Content-Type": "text/html",
+    const response = await axios.get("https://oauthserver.onrender.com/auth/google/callback", {
+      withCredentials: true,
     });
     console.log(response);
-    const data = await response.json();
-    console.log(data);
-    setUser(data.user);
     // const token = Cookies.get("x-auth-cookie");
     // if (token) {
     //   Cookies.remove("x-auth-cookie");
